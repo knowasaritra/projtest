@@ -25,49 +25,43 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 editText4=(EditText)findViewById(R.id.editText4);
                 editText5=(EditText)findViewById(R.id.editText5);
                 editText9=(EditText)findViewById(R.id.editText9);
-                String n1=editText4.getText().toString();
-                String n2=editText5.getText().toString();
-                double number1=Double.parseDouble(n1);
-                double number2=Double.parseDouble(n2);
-                if(button1.getText()=="add")
-                {
-                    double s=0;
-                    s=number1+number2;
-                    String k=String.valueOf(s);
-                    editText9.setText(k);
-                }
-                if(button1.getText()=="mul")
-                {
-                    double s=1;
-                    s=number1*number2;
-                    String k=String.valueOf(s);
-                    editText9.setText(k);
-                }
-                if(button1.getText()=="sub")
-                {
-                    double s=0;
-                    s=number1-number2;
-                    String k=String.valueOf(s);
-                    editText9.setText(k);
-                }
-                if(button1.getText()=="divide")
-                {
-                    double s=1;
-                    if(number2==0)
-                    {
-                        Toast.makeText(getApplicationContext(),"cannot divide by 0",Toast.LENGTH_SHORT).show();
-                        editText5.setText(" ");
+                try {
+                    String n1 = editText4.getText().toString();
+                    String n2 = editText5.getText().toString();
+                    double number1 = Double.parseDouble(n1);
+                    double number2 = Double.parseDouble(n2);
+                    if (button1.getText() == "add") {
+                        double s = 0;
+                        s = number1 + number2;
+                        String k = String.valueOf(s);
+                        editText9.setText(k);
                     }
-                    else
-                    {
-                    s=number1/number2;
-                    String k=String.valueOf(s);
-                    editText9.setText(k);
+                    if (button1.getText() == "mul") {
+                        double s = 1;
+                        s = number1 * number2;
+                        String k = String.valueOf(s);
+                        editText9.setText(k);
                     }
-                }
-                if(n1.isEmpty()==true)
+                    if (button1.getText() == "sub") {
+                        double s = 0;
+                        s = number1 - number2;
+                        String k = String.valueOf(s);
+                        editText9.setText(k);
+                    }
+                    if (button1.getText() == "divide") {
+                        double s = 1;
+                        if (number2 == 0) {
+                            Toast.makeText(getApplicationContext(), "cannot divide by 0", Toast.LENGTH_SHORT).show();
+                            editText5.setText(" ");
+                        } else {
+                            s = number1 / number2;
+                            String k = String.valueOf(s);
+                            editText9.setText(k);
+                        }
+                    }
+                }catch (NumberFormatException e)
                 {
-                    Toast.makeText(getApplicationContext(),"enter first number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"please enter numbers ",Toast.LENGTH_SHORT).show();
                 }
 
             }
