@@ -1,5 +1,8 @@
 package com.example.calculator;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,14 +12,21 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import java.util.prefs.PreferencesFactory;
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     EditText editText4, editText5,editText9;
     Button button1, button2;
-
+    public static final String MYPRFERENCES="sharedprefs";
+    public static final String NU1="n1";
+    public static final String NU2="n2";
+    private String x1;
+    private String x2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         button2 = (Button) findViewById(R.id.button2);
         button1 = (Button) findViewById(R.id.button1);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -26,27 +36,32 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 editText5=(EditText)findViewById(R.id.editText5);
                 editText9=(EditText)findViewById(R.id.editText9);
                 try {
-                    String n1 = editText4.getText().toString();
-                    String n2 = editText5.getText().toString();
-                    double number1 = Double.parseDouble(n1);
-                    double number2 = Double.parseDouble(n2);
+       //             loadData();
+         //           updateView();
+                    String x1=editText4.getText().toString();
+                    String x2=editText5.getText().toString();
+                    double number1 = Double.parseDouble(x1);
+                    double number2 = Double.parseDouble(x2);
                     if (button1.getText() == "add") {
                         double s = 0;
                         s = number1 + number2;
                         String k = String.valueOf(s);
                         editText9.setText(k);
+                        //deletePrefs();
                     }
                     if (button1.getText() == "mul") {
                         double s = 1;
                         s = number1 * number2;
                         String k = String.valueOf(s);
                         editText9.setText(k);
+                        //deletePrefs();
                     }
                     if (button1.getText() == "sub") {
                         double s = 0;
                         s = number1 - number2;
                         String k = String.valueOf(s);
                         editText9.setText(k);
+                        //deletePrefs();
                     }
                     if (button1.getText() == "divide") {
                         double s = 1;
@@ -57,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                             s = number1 / number2;
                             String k = String.valueOf(s);
                             editText9.setText(k);
+                          //  deletePrefs();
                         }
                     }
                 }catch (NumberFormatException e)
@@ -78,8 +94,7 @@ public void showPopup(View view)
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.add:
                 button1.setText("add");
                 return true;
@@ -96,4 +111,39 @@ public void showPopup(View view)
                 return false;
         }
     }
+ /*   @Override
+    public void onBackPressed() {
+
+        saveData();
+
+        super.onBackPressed();
+
+    }
+    public void saveData()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences(MYPRFERENCES,MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString(NU1,editText4.getText().toString());
+        editor.putString(NU2,editText5.getText().toString());
+        editor.apply();
+    }
+    public void loadData()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences(MYPRFERENCES,MODE_PRIVATE);
+        x1=sharedPreferences.getString(NU1," ");
+        x2=sharedPreferences.getString(NU2," ");
+    }
+    public void updateView()
+    {
+        editText4.setText(x1);
+        editText5.setText(x2);
+    }
+   public void deletePrefs()
+    {
+        SharedPreferences sharedPreferences=getSharedPreferences(MYPRFERENCES,MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }*/
+
 }
